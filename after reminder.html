@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>for reminder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #ccc;
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+      color: #3790d0;
+      margin-bottom: 20px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #338dce;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004e85;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Did You Take Your Medicines ? <br>
+के तपाईंले आफ्नो औषधि लिनुभयो?
+    </h2>
+    <button onclick="submitContact()">Yes I did <br>
+        मैले औषधि खाएको छु </button>
+  </div>
+
+  <script>
+    function submitContact() {
+      const name = document.getElementById("fullName").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const relation = document.getElementById("relation").value;
+
+      if (!name || !phone || !email || !relation) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      alert("Contact info submitted successfully!");
+      console.log({ name, phone, email, relation });
+
+      // You can add logic here to save data or redirect
+    }
+  </script>
+
+</body>
+</html>
