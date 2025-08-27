@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Patient - Medicine Schedule</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+      color: #000000;
+    }
+    h2 {
+      color: #0077cc;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #0077cc;
+      color: white;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .medicine-item {
+      background: white;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Enter Your Medicine Details</h2>
+  <label for="medCount">Number of Medicines:</label>
+  <input type="number" id="medCount" min="1" placeholder="Enter number of medicines">
+
+  <button onclick="createMedicineFields()">Create Fields</button>
+
+  <form id="medicinesForm" style="margin-top: 20px;"></form>
+
+  <script>
+    function createMedicineFields() {
+      const count = parseInt(document.getElementById('medCount').value);
+      const form = document.getElementById('medicinesForm');
+      form.innerHTML = ''; // Clear previous fields
+
+      if (!count || count < 1) {
+        alert('Please enter a valid number of medicines.');
+        return;
+      }
+
+      for (let i = 1; i <= count; i++) {
+        const div = document.createElement('div');
+        div.className = 'medicine-item';
+
+        div.innerHTML = `
+          <h3>Medicine i</h3>
+          <label for="name{i}">Medicine Name:</label>
+          <input type="text" id="namei" name="name{i}" placeholder="e.g. Paracetamol" required>
+
+          <label for="dosei">Dosage:</label>
+          <input type="text" id="dose{i}" name="dosei" placeholder="e.g. 500mg" required>
+
+          <label for="interval{i}">Time Interval (times a day):</label>
+          <input type="number" id="intervali" name="interval{if}" min="1" placeholder="e.g. 6" required>
+        `;
+
+form.appendChild(div);
+      }
+
+      const submitBtn = document.createElement('button');
+      submitBtn.type = 'button';
+      submitBtn.textContent = 'Save Medicines';
+      submitBtn.onclick = saveMedicines;
+      form.appendChild(submitBtn);
+    }
+
+    function saveMedicines() {
+      const count = parseInt(document.getElementById('medCount').value);
+      let allValid = true;
+      let medicines = [];
+
+      for (let i = 1; i <= count; i++) {
+        const name = document.getElementById('name' + i).value.trim();
+        const dose = document.getElementById('dose' + i).value.trim();
+        const interval = document.getElementById('interval' + i).value.trim();
+
+        if (!name || !dose || !interval) {
+          allValid = false;
+          break;
+        }
+
+        medicines.push({ name, dose, interval });
+      }
+
+      if (!allValid) {
+        alert('Please fill all medicine details.');
+        return;
+      }
+
+      console.log('Medicines saved:', medicines);
+      alert('Medicines saved successfully!');
+
+      // Here you can add further logic like saving to database or localStorage
+    }
+  </script>
+
+</body>
+</html>
+
+How to use:  <br>                 
+- Enter number of medicines<br>
+- Click “Create Fields”<br>
+- Fill details for each medicine<br>
+- Click “Save Medicines”<br>
+<br>
+कसरी प्रयोग गर्ने: <br>
+- औषधिहरूको संख्या प्रविष्ट गर्नुहोस्<br>
+- “Create Fields” मा क्लिक गर्नुहोस्<br>
+- प्रत्येक औषधिको विवरण भर्नुहोस्<br>
+- “Save Medicines” मा क्लिक गर्नुहोस्<br>
